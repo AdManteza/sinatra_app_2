@@ -1,0 +1,14 @@
+<% @tracks.each do |track| %>
+  <div class="track">
+    <h3><a href="/tracks/<%= track.id %>"><%= track.song_title %></a><small>(by: <%= track.artist %>)</small></h3>
+    <p>
+      <a href="<%= track.url %>"><%= track.url %></a>
+    </p>
+  </div>
+<% end %>
+
+<a href="/tracks/new">Add a new song!</a>
+
+
+
+
