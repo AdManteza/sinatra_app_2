@@ -1,14 +1,12 @@
 <% @tracks.each do |track| %>
-  <div class="track">
-    <h3><a href="/tracks/<%= track.id %>"><%= track.song_title %></a><small>(by: <%= track.artist %>)</small></h3>
-    <p>
-      <a href="<%= track.url %>"><%= track.url %></a>
-    </p>
+  <div>
+    <h3><a href="/tracks/<%= track.id %>"><%= track.song_title %></a>
+    <p><a href="<%= track.url %>">See Video</a></p>
+    <p><small>(Artist: <%= track.artist %>)</small></p>
+    <p><small>(Posted by: <%= track.user.user_name %>)</small></p>
   </div>
 <% end %>
 
-<a href="/tracks/new">Add a new song!</a>
+<p><a href="/tracks/new">Add a new song!</a></p>
 
-
-
-
+<p><a href="/users/home">My Personal Wall</a></p>
