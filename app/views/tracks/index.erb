@@ -1,12 +1,20 @@
 <% @tracks.each do |track| %>
   <div>
-    <h3><a href="/tracks/<%= track.id %>"><%= track.song_title %></a>
+  
+    <h3 name="track_song_title"><a href="/tracks/<%= track.id %>"><%= track.song_title %></a>
     <p><a href="<%= track.url %>">See Video</a></p>
     <p><small>(Artist: <%= track.artist %>)</small></p>
     <p><small>(Posted by: <%= track.user.user_name %>)</small></p>
+    <p><small>(Upvotes: <%= track.votes.count %>)</small></p>
+
+    <form method="POST" action="/vote">
+      <input type='hidden' onsubmit="myButton.disabled = true; return true;" name='track_id' value=<%= track.id %> />
+      <p><input type="submit" name="myButton" value="UpVote!"></p>
+    </form>
   </div>
 <% end %>
 
 <p><a href="/tracks/new">Add a new song!</a></p>
 
 <p><a href="/users/home">My Personal Wall</a></p>
+

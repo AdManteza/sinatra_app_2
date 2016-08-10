@@ -4,7 +4,8 @@ get '/' do
 end
 
 get '/tracks' do
-  @tracks = Track.all
+  @tracks = Track.all.sort_by { |track| track.votes.count }.reverse
+
   @users = User.all
 
   erb :'tracks/index'
@@ -58,7 +59,7 @@ end
 
 get '/users/home' do
   redirect '/sessions/login' unless session[:id]
-  
+
   @user = User.find(session[:id])
   @tracks = Track.where(user_id: @user.id)
 
@@ -94,6 +95,16 @@ end
 get '/sessions/logout' do
   session.clear
   redirect '/'
+end
+
+post '/vote' do
+  track_id = params[:track_id]
+
+  vote = Vote.new(user_id: session[:id], track_id: track_id)
+  
+  vote.save
+  
+  redirect '/tracks'
 end
 
 
